@@ -1,0 +1,221 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,700;1,300&display=swap');
+head{
+	display: none;
+}
+
+body{
+	font-family: 'Montserrat', sans-serif;
+	display: block;
+    margin: 10px 0;
+    padding-top: 50px;
+}
+header{
+	background-color: white;
+	float: top;
+	margin-top: 2px;
+	text-align: center;
+}
+h1{
+	background-color: white;
+    text-align: center;
+    margin: 0;
+    padding: 8px;
+    font-size: 40px;
+}
+h2{
+	color: red;
+}
+p{
+	font-size: 18px;
+	color: black;
+}
+nav{
+	
+    background-color: #9fa8a3;
+    margin: 0;
+    padding-right: 5px;
+    padding-left: 5px;
+   
+}
+nav ul{
+    
+    list-style-type: none;
+    text-align: right;
+    margin: 0 auto;
+}
+nav li{
+	display: inline;
+    padding: 8px 10px;
+    border-radius: 3px;
+
+}
+nav a{
+	text-decoration: none;
+	text-transform: uppercase;
+}
+nav a :link{
+color: purple;
+}
+nav a:visited{
+	color: pink;
+}
+nav a:hover{
+	color: gray;
+}
+nav a:active{
+	color: black;
+}
+main{
+  background-color: white;
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 10px;
+  text-align: center;
+}
+hr{
+	max-width: 80%;
+	margin: 40px auto;
+	text-align:center;
+}
+footer{
+	background-color: #9fa8a3;
+	color:white;
+	padding: 50px;
+	border-top:3px solid black;
+}
+footer p{
+	text-align:center;
+	max-width: 1000px;
+	margin:0 auto;
+}
+table{
+	background-color: #eeeeee;
+	border-spacing:100px;
+	margin-bottom: 10px;
+}
+th{
+	background-color:purple;
+	color:black;
+	padding-top: 100px;
+	box-sizing: 100px;
+}
+td,th{
+padding: 40px;
+border: 1px solid orange;
+line-height: 1.5;
+margin-bottom: 50px;
+}
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+}
+.resume h2,
+.resume h4{
+	text-align:center;
+}
+.resume h5{
+	font-size: 3em;
+}
+
+.resume h2{
+	font-size: 40px;
+}
+.resume h3{
+	font-size: 35px;
+}
+canvas {
+    background-color: blue;
+	margin:0 auto;
+	display:block;
+	background-image:url(pic.jpg);
+	border: 5px solid blue;
+	box-shadow: 5px 5px 6px black;
+	color: blue;
+	lighting-color: blue;
+}
+.center-text{
+	text-align:center;
+}
+.game-controls{
+	margin-top: 20px;
+	text-align:center;
+	color: blue;
+}
+.myButton {
+	box-shadow:inset 0px 1px 3px 0px red;
+	background:linear-gradient(to bottom, blue; 5%, blue; 100%);
+	background-color:red;
+	border-radius:5px;
+	border:1px solid blue;
+	display:inline-block;
+	cursor:pointer;
+	color:red;
+	font-family:Arial;
+	font-size:10px;
+	font-weight:bold;
+	padding:10px 30px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px white;
+}
+.myButtonhover {
+	background:linear-gradient(to bottom, blue, 5%, blue, 100%);
+	background-color:orange;
+}
+.myButtonactive {
+	position:relative;
+	top:1px;
+}
+
+label{
+	float: left;
+	width: 8em;
+	padding-right: 1em;
+	color: green;
+}
+input, textarea{
+	margin-bottom:1em;
+	display:block;
+	border-radius: 5px;
+}
+#submit{
+	display:block;
+	background-color: blue;
+	height: 30px;
+	color: green;
+}
+textarea{
+	height: 100px;
+	margin-top: 10px;
+}
+
+form{
+	background-color: orange;
+	border: 1px solid gray;
+	padding: 20px;
+	max-width: 350px;
+	margin: 0 auto;
+	box-shadow: 2px 2px 2px gray;
+}
+.center-game{
+	margin:0 auto;
+}
+.logoo{
+    float: top;
+    max-height: 80%;
+   
+}
+header img{
+	float: top;
+	margin left: auto;
+	display: block;
+	max-width: 50%;
+	height: auto;
+
+}
+div{
+	padding right: 100%;
+	text-align: center;
+}

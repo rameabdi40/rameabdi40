@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="title" content="Ramadan Amin">
+<title>Ramadan Amin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link href="http://fonts.googleapis.com/css?family=Roboto:400,300,100,400italic,900&amp;subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="style.css">
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<!-- Custom styles for this template -->
+</head>   
+<body>
+   <header> <img src="logoo.png" class="img-responsive" width="180px" height="180px" style="max-width:600px;" alt="logo">
+         </header>
+         <nav>
+          
+          
+                 </div>
+                 <div class="navbar-collapse collapse">
+                      <ul class="nav navbar-nav navbar-right">
+                        <li><a href="home.html">home</a> </li>
+                        <li><a href="form.html"> form</a></li>
+                        <li><a href="resume.html">resume</a></li>
+                        <li><a href="table.html">table</a></li>
+                        <li><a href="multimedia.html"> multimedia</a></li>
+                        <li><a href="flappy.html"> flappy</a></li>  
+                      </ul>
+            </div><!--/.nav-collapse -->
+            </div>
+   
+            </div>
+        </nav>
+<main> 
+    <h2> Flappy Bird Game</h2>
+    <p>I made this game</p>
+    
+    
+    
+    <h3 class="center-text">Use the FLY WINGS button to stay in the air. How long can you fly?</h3>
+
+    <div id="game"></div>
+    <div class="game-controls">
+      <button class="myButton" onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">FLY</button>
+      <a href=""><button class="myButton">PLAY AGAIN</button></a>
+    </div>
+    <hr>
+<script>
+
+var myGamePiece;
+var myObstacles = [];
+var myScore;
+
+function startGame() {
+    myGamePiece = new component(30, 30, "blue", 10, 120);
+    myGamePiece.gravity = 0.09;
+    myScore = new component("50px", "Consolas", "red", 400, 50, "text");
+    myGameArea.start();
+}
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 700;
+        this.canvas.height = 400;
+        this.context = this.canvas.getContext("2d");
+    var myGame = document.getElementById("game");
+    myGame.insertBefore(this.canvas, myGame.childNodes[0]);        
+    this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 50);
+        },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    this.score = 0;
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;
+    this.gravity = 0;
+    this.gravitySpeed = 0;
+    this.update = function() {
+        ctx = myGameArea.context;
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }
+    this.newPos = function() {
+        this.gravitySpeed += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY + this.gravitySpeed;
+        this.hitBottom();
+    }
+    this.hitBottom = function() {
+        var rockbottom = myGameArea.canvas.height - this.height;
+        if (this.y > rockbottom) {
+            this.y = rockbottom;
+            this.gravitySpeed = 0;
+        }
+    }
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
+}
+
+function updateGameArea() {
+    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+    for (i = 0; i < myObstacles.length; i += 1) {
+        if (myGamePiece.crashWith(myObstacles[i])) {
+            return;
+        } 
+    }
+    myGameArea.clear();
+    myGameArea.frameNo += 1;
+    if (myGameArea.frameNo == 1 || everyinterval(150)) {
+        x = myGameArea.canvas.width;
+        minHeight = 20;
+        maxHeight = 200;
+        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+        minGap = 50;
+        maxGap = 200;
+        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+        myObstacles.push(new component(20, height, "#800080", x, 0));
+        myObstacles.push(new component(20, x - height - gap, "#800080", x, height + gap));
+    }
+    for (i = 0; i < myObstacles.length; i += 1) {
+        myObstacles[i].x += -1;
+        myObstacles[i].update();
+    }
+    myScore.text="SCORE: " + myGameArea.frameNo;
+    myScore.update();
+    myGamePiece.newPos();
+    myGamePiece.update();
+    }
+
+function everyinterval(n) {
+    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+     }
+function accelerate(n) {
+    myGamePiece.gravity = n;
+    }
+</script>
+<br>
+<button onmousedown="accelerate(-0.3)" onmouseup="accelerate(0.04)"> accelerate</button>
+<p>use accelerate button to stay in the air</p>
+<p>how long can you stay alive</p>
+  </main>
+   <footer>
+
+       <hr>
+
+
+         <div class="container-fluid" style="margin-left:auto;margin-right:auto">
+    
+           <div class="row">
+    
+            <div class="col-md-12">
+        
+              <p>
+        
+                <b>Website: </b><a href="https://rameabdi.com" target="_blank">rameabdi.com</a><br> 
+                <b>Github:</b> <a href="https://github.com/rameabdi40/rameabdi40" target="_blank">github.com/rameabdi40/rameabdi40</a><br>
+
+                <b>email:</b> <a href="mailto:rameabdi40@gmail.com">rameabdi40@gmail.com</a><br> 
+              </p>
+              <p> @2021 ramadan amin, bloomington, Minnesota.
+        
+              All rights reserved.</p>
+            </div>
+   
+            </div></div>
+        </footer>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>
